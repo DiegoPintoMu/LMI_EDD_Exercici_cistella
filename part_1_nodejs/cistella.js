@@ -34,12 +34,29 @@ class Producte {
 //                      A més, calcularà el subtotal per cada línia (multiplicant) el preu unitari per la quantitat,
 //                      I al final mostrarà el preu total, com a suma de tots els subtotals
 
+class Linia_Cistella{
+    constructor(producte, quantitat){
+        this.producte = producte,
+        this.quantitat = quantitat
+    }
+
+    mostrarLiniaCistella() {
+        console.log('${this.quantitat} X ${this.producte.descripcio} ${this.producte.preu} = ${this.quantitat * this.producte.preu}')
+    }
+
+}
+
+
 class Cistella {
     constructor() {
         this.productes = [];
     }
 
     afegirProducte(producte, quantitat) {
+        this.LiniaCistella.push({
+            producte,
+            quantitat
+        })
         this.productes.push({
             producte,
             quantitat: parseInt(quantitat)
@@ -47,27 +64,22 @@ class Cistella {
     }
 
     mostrarCistella() {
-        if (this.productes.length === 0) {
-            console.log('La cistella esta buida.');
-            return;
+        let total=0;
+        this.productes.forEach((linia)=> {
+            linia.mostrarCistella();
+            total+=linia.quantitatlinia.producte.preu;
+            console.log('Total ${total}')
         }
+        );
 
-        let total = 0;
-
-        console.log('\n--- Contingut de la cistella ---\n');
-
-        this.productes.forEach((item, index) => {
-            const subtotal = item.producte.preu * item.quantitat;
-            total += subtotal;
-
-            console.log(
-                `${index + 1}. ${item.producte.toString()} x ${item.quantitat} = ${subtotal} €`
-            );
-        });
-
-        console.log('\nTotal: ' + total + ' €\n');
+        /*
+        for (let i = 0; i < this.productes.length; i++) {
+            this.productes[i].mostrarCistella();
+        }*/
     }
 }
+
+
 
 // Funció per mostrar ajuda
 function mostraAjuda() {
